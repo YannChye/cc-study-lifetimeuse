@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Substance Use Graph</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="../static/css/style.css">
+</head>
+
+<body>
+    <div class="jumbotron vertical-center">
+      <h2>The Cannabis Components Study</h2>
+      <p>Lifetime Use Profile Graph</p>
+    </div>
+    <div id="info">This page is intended for you to record your lifetime cannabis use level for the purpose of 
+    the Cannabis Components Study. Please enter your details in the <b>'Subject Info'</b> box to the left and click <b>'Create Graph'</b>. 
+    Doing so will create a graph in the empty space below. 
+    <br><br>
+    Each column within the graph represents 1 year of age, 
+    while each row within the graph represents an average of 1 joint of cannabis used per week. Your current use level 
+    will have been shaded in for you in the graph. Your task will be to click on the individal rectangles in the graph that 
+    represent your average cannabis use level at each age, starting from the age you started using cannabis. This will allow 
+    us to track your trajectory of use across your lifetime.
+    <br><br>
+    After you have completed the graph, please DO NOT leave the page yet. Notify the researcher for what to do next.</div>
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <form id="form">
+            <div class="form-group">
+              <div id="header"><h4>Subject Info</h4></div>
+              <div id="metadata">
+                <label for="currage" class="currage">How old are you?</label>
+                <br>
+                <span class="slidecontainer">
+                  <input type="range" min="18" max="80" value="50" class="slider" id="currage">
+                </span>
+                <span id="currageout"></span>
+                <hr>
+                <label for="startage" class="startage">How old were you when you first started using cannabis?</label>
+                <br>
+                <span class="slidecontainer">
+                  <input type="range" min="1" max="80" value="50" class="slider" id="startage">
+                </span>
+                <span id="startageout"></span>
+                <hr>
+                <label for="uselvl" class="uselvl">On average, how many joints of cannabis do you smoke a week currently?</label>
+                <br>
+                <span class="slidecontainer">
+                  <input type="range" min="1" max="100" value="50" class="slider" id="uselvl">
+                </span>
+                <span id="uselvlout"></span>
+                <hr>
+                <label for="usehigh" class="usehigh">At your highest level of use, how much cannabis where you using in comparison to your current use level?</label>
+                <select class="form-control" id="usehigh" name="usehigh" onchange="changeFunc()">
+                  <option value=1>My highest level of use is comparable to my current use level</option>
+                  <option value=2>At my highest, I used almost twice as much as I am currently using</option>
+                  <option value=3>At my highest, I used almost three times as much as I am currently using</option>
+                  <option value=4>At my highest, I used almost four times as much as I am currently using</option>
+                  <option value=5>At my highest, I used more than four times as much as I am currently using</option>
+                </select>
+              </div>
+            </div>
+          </form> 
+        </div>
+        <div class="col-8">     
+          <div id="graph">
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>            
+    <!-- D3 JavaScript -->
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- our JavaScript -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/config.js') }}"></script>
+    <script type="text/javascript" src="../static/js/logic.js"></script>
+</body>
+</html>
