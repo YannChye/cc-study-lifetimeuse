@@ -100,7 +100,7 @@ function makeGraph(output1,output2,output3,highUse) {
             .attr("x",(d,index) => {
                 return (svgWidth-40)/duration*d[0]+40;
             })
-            .attr("y",(svgHeight-10)/height*data[((data.length)-1)][1])
+            .attr("y",(svgHeight-30))
             .attr("font-size","10px")
             .text(d=>{
                 if (d[0]/5==Math.round(d[0]/5)) {

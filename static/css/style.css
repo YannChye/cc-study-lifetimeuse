@@ -2,6 +2,9 @@ html,body {
   font-family: "Times New Roman", Times, serif;
   height: 100%;
 }
+a {
+  font-weight:bold;
+}
 .container {
   padding-right:0;
   padding-left:0;
