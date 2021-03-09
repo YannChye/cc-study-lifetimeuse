@@ -48,21 +48,35 @@
                 </span>
                 <span id="startageout"></span>
                 <hr>
-                <label for="uselvl" class="uselvl">On average, how many joints of cannabis do you smoke a week currently?</label>
+                <label for="uselvl" class="uselvl">On average, how many <select class="form-control" id="usetype" name="usetype">
+                  <option value="joint">joints</option>
+                  <option value="bong">bongs</option>
+                  <option value="cone">cones</option>
+                  <option value="pipe">pipes</option>
+                  <option value="gram">grams</option>
+                </select>
+                 of cannabis do you smoke a week currently?</label>
                 <br>
                 <span class="slidecontainer">
                   <input type="range" min="1" max="100" value="50" class="slider" id="uselvl">
                 </span>
                 <span id="uselvlout"></span>
                 <hr>
-                <label for="usehigh" class="usehigh">At your highest level of use, how much cannabis where you using in comparison to your current use level?</label>
+                <label for="usehigh" class="usehigh">At your highest level of use, how much cannabis were you using, compared to your current use level?</label>
                 <select class="form-control" id="usehigh" name="usehigh" onchange="changeFunc()">
-                  <option value=1>My highest level of use is comparable to my current use level</option>
-                  <option value=2>At my highest, I used almost twice as much as I am currently using</option>
-                  <option value=3>At my highest, I used almost three times as much as I am currently using</option>
-                  <option value=4>At my highest, I used almost four times as much as I am currently using</option>
-                  <option value=5>At my highest, I used more than four times as much as I am currently using</option>
+                  <option value=1>Roughly the same amount</option>
+                  <option value=2>Twice as much</option>
+                  <option value=3>Three times as much</option>
+                  <option value=4>Four times as much</option>
+                  <option value=5>More than four times as much</option>
                 </select>
+                <hr>
+                <div class="researcher">
+                  <i>
+                    <h6><b>researcher use</b></h6>
+                    cumulative use - <span id="totalSquares"></span>
+                  </i>
+                </div>
               </div>
             </div>
           </form> 

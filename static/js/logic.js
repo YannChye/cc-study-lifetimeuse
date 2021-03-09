@@ -27,18 +27,18 @@ slider3.oninput = function() {
   output3.innerHTML = this.value;
   makeGraph(output1,output2,output3,highUse)
 }
-
 var highUse=1
 function changeFunc() {
     var selectBox = document.getElementById("usehigh");
     highUse = selectBox.options[selectBox.selectedIndex].value;
     makeGraph(output1,output2,output3,highUse)
    }
-
 // Create graph
 function makeGraph(output1,output2,output3,highUse) {
     var duration=parseInt(output1.innerHTML)-parseInt(output2.innerHTML)+1;
     var height=parseInt(output3.innerHTML)*parseInt(highUse)+1;
+    var numSquares=Array(duration).fill(0);
+    numSquares[duration-1]=parseInt(output3.innerHTML);
     data=[]
     for (i=0;i<duration;i++) {
         for (j=0;j<height;j++) {
@@ -87,9 +87,22 @@ function makeGraph(output1,output2,output3,highUse) {
         .on("click",function(d) {
             if (d3.select(this).attr("fill")==color[0]) {
                 d3.select(this).attr("fill",color[1])
+                //d3.selectAll("rect").each(function(r) {
+                    //if (r.data()[0][0]==d3.select(this).data()[0][0]) {
+                      //  if (r.attr("fill")=="grey") {
+                        //    console.log(r.data()[0][1])
+                        //}
+                    //}
+                //})
+                if (parseInt(output3.innerHTML-d3.select(this).data()[0][1])>numSquares[d3.select(this).data()[0][0]]) {
+                    numSquares[d3.select(this).data()[0][0]]=parseInt(output3.innerHTML-d3.select(this).data()[0][1])
+                    document.getElementById("totalSquares").innerHTML=(numSquares.reduce((a,b)=>a+b,0)*52.1429)+" "+document.getElementById("usetype").value+"s";
+                }
             }
             else {
                 d3.select(this).attr("fill",color[0])
+                numSquares[d3.select(this).data()[0][0]]=0
+                document.getElementById("totalSquares").innerHTML=(numSquares.reduce((a,b)=>a+b,0)*52.1429)+" "+document.getElementById("usetype").value+"s";
             }
         })
         svg.append("g")
@@ -132,6 +145,6 @@ function makeGraph(output1,output2,output3,highUse) {
             .attr("transform",`rotate(-90,12,${svgHeight/2})`)
             .attr("font-size","16px")
             .attr("class","axislabel")
-            .text("Average number of joints per week")
+            .text("Average number of "+document.getElementById("usetype").value+"s per week")
 }
 color=["white","grey"]
