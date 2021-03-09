@@ -87,13 +87,6 @@ function makeGraph(output1,output2,output3,highUse) {
         .on("click",function(d) {
             if (d3.select(this).attr("fill")==color[0]) {
                 d3.select(this).attr("fill",color[1])
-                //d3.selectAll("rect").each(function(r) {
-                    //if (r.data()[0][0]==d3.select(this).data()[0][0]) {
-                      //  if (r.attr("fill")=="grey") {
-                        //    console.log(r.data()[0][1])
-                        //}
-                    //}
-                //})
                 if (parseInt(output3.innerHTML-d3.select(this).data()[0][1])>numSquares[d3.select(this).data()[0][0]]) {
                     numSquares[d3.select(this).data()[0][0]]=parseInt(output3.innerHTML-d3.select(this).data()[0][1])
                     document.getElementById("totalSquares").innerHTML=(numSquares.reduce((a,b)=>a+b,0)*52.1429)+" "+document.getElementById("usetype").value+"s";
@@ -101,9 +94,22 @@ function makeGraph(output1,output2,output3,highUse) {
             }
             else {
                 d3.select(this).attr("fill",color[0])
-                numSquares[d3.select(this).data()[0][0]]=0
+                var greyRects=document.querySelectorAll('[fill="grey"]');
+                var bigRect=svgHeight+200
+                for (i=0;i<greyRects.length;i++) {
+                    if ((Math.round(greyRects[i].x.animVal.value)==Math.round(d3.select(this).attr("x"))) && (greyRects[i].y.animVal.value<bigRect)) {
+                        bigRect=greyRects[i].y.animVal.value 
+                    }
+                }
+                if (bigRect < svgHeight+200) {
+                    numSquares[d3.select(this).data()[0][0]]=(height-(bigRect/(svgHeight-40)*height)-1)
+                }
+                else {
+                    numSquares[d3.select(this).data()[0][0]]=0
+                }
                 document.getElementById("totalSquares").innerHTML=(numSquares.reduce((a,b)=>a+b,0)*52.1429)+" "+document.getElementById("usetype").value+"s";
             }
+            
         })
         svg.append("g")
             .selectAll("text")
