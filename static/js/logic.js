@@ -87,7 +87,7 @@ function makeGraph(output1,output2,output3,highUse) {
         .on("click",function(d) {
             if (d3.select(this).attr("fill")==color[0]) {
                 d3.select(this).attr("fill",color[1])
-                if (parseInt(output3.innerHTML-d3.select(this).data()[0][1])>numSquares[d3.select(this).data()[0][0]]) {
+                if (parseInt(height)>numSquares[d3.select(this).data()[0][0]]) {
                     numSquares[d3.select(this).data()[0][0]]=parseInt(output3.innerHTML-d3.select(this).data()[0][1])
                     document.getElementById("totalSquares").innerHTML=(numSquares.reduce((a,b)=>a+b,0)*52.1429)+" "+document.getElementById("usetype").value+"s";
                 }
