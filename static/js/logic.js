@@ -37,8 +37,9 @@ function changeFunc() {
 function makeGraph(output1,output2,output3,highUse) {
     var duration=parseInt(output1.innerHTML)-parseInt(output2.innerHTML)+1;
     var height=parseInt(output3.innerHTML)*parseInt(highUse)+1;
-    var numSquares=Array(duration).fill(0);
+    var numSquares=Array(duration).fill(0); //variable to track cumulative use
     numSquares[duration-1]=parseInt(output3.innerHTML);
+    document.getElementById("totalSquares").innerHTML=(numSquares.reduce((a,b)=>a+b,0)*52.1429)+" "+document.getElementById("usetype").value+"s";
     data=[]
     for (i=0;i<duration;i++) {
         for (j=0;j<height;j++) {
@@ -87,8 +88,9 @@ function makeGraph(output1,output2,output3,highUse) {
         .on("click",function(d) {
             if (d3.select(this).attr("fill")==color[0]) {
                 d3.select(this).attr("fill",color[1])
-                if (parseInt(height)>numSquares[d3.select(this).data()[0][0]]) {
-                    numSquares[d3.select(this).data()[0][0]]=parseInt(output3.innerHTML-d3.select(this).data()[0][1])
+                if (parseInt(height-d3.select(this).data()[0][1]-1)>numSquares[d3.select(this).data()[0][0]]) {
+                    numSquares[d3.select(this).data()[0][0]]=parseInt(height-d3.select(this).data()[0][1]-1)
+                    console.log(numSquares)
                     document.getElementById("totalSquares").innerHTML=(numSquares.reduce((a,b)=>a+b,0)*52.1429)+" "+document.getElementById("usetype").value+"s";
                 }
             }
